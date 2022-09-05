@@ -14,6 +14,7 @@ disableDisclaimer: false
 この記事では、Dynamics Lifecycle services (LCS) のAPIの使い方を紹介します。
 <!-- more -->
 
+- [LCS プロジェクト内の環境の一覧の取得](#lcs-プロジェクト内の環境の一覧の取得)
 - [HTTPリクエスト送信の例として、まずはcurlコマンドを使用したクラウドホスト環境の起動と停止を行います。](#httpリクエスト送信の例としてまずはcurlコマンドを使用したクラウドホスト環境の起動と停止を行います)
 - [注意](#注意)
 - [おわりに](#おわりに)
@@ -68,19 +69,29 @@ Azure Portal (https://portal.azure.com/) にサインインし、Azure Active Di
 
 アクセストークンの発行のため、コマンドプロンプトを起動し、以下のコマンドを実行します。
 なお、コマンド内の{client_id}には上記(1)クライアントIDの値、{tenant_id}には上記の(2)テナントIDの値、{username}には使用しているユーザーのメールアドレス、{password}にはパスワードを入れます。
-```DOS
+```
 curl -X POST https://login.microsoftonline.com/{tenant_id}/oauth2/v2.0/token -F client_id={client_id} -F scope=https://lcsapi.lcs.dynamics.com//.default -F username={username} -F password={password} -F grant_type=password
 ```
-以下のスクリーンショットの通り、上記のコマンドを実行しますと、リクエストに対して、レスポンスが返ってきます。
-レスポンス内の"access_token" (4)の値が発行されたアクセストークンとなります。
-![](./LCS-API-environment/aad_token.png)
 
+上記のコマンドを実行しますと、リクエストに対して、レスポンスが返ってきます。
+レスポンス内の"access_token" の値 (eyJ)が発行されたアクセストークンとなります。
+```
+{"token_type":"Bearer","scope":"https://lcsapi.lcs.dynamics.com//user_impersonation https://lcsapi.lcs.dynamics.com//.default","expires_in":5290,"ext_expires_in":5290,"access_token":"eyJ............."}
+```
+
+<!---
+![](./LCS-API-environment/aad_token.png)
+-->
 
 
 上記の手順により、Dynamics Lifecycle servicesのAPIの呼び出しの準備ができました。
 発行されたアクセストークンを含めたHTTPリクエストを各APIのエンドポイントに送信することにより、LCSで提供しているAPIを利用することができます。
 
-
+## LCS プロジェクト内の環境の一覧の取得
+以下のようなリクエストによりLCS プロジェクト内の環境の一覧を取得することができます。
+```
+curl -X GET https://lcsapi.lcs.dynamics.com/environmentinfo/v1/detail/project/1750229/?page=1 -H "Content-Type: application/json" -H "'x-ms-version': '2017-09-15'" -H "Authorization: Bearer eyJ....."
+```
 
 ## HTTPリクエスト送信の例として、まずはcurlコマンドを使用したクラウドホスト環境の起動と停止を行います。
 
