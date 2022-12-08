@@ -12,8 +12,8 @@ disableDisclaimer: false
 ---
 
 こんにちは、日本マイクロソフトの佐藤です。
-この記事では、Power AutomateのFin & Ops Apps (Dynamics 365) コネクタにおけるフィルターの設定方法をご案内します。
-この手順により、Power AutomateからDynamics 365 for Finance and Operations (D365FO)環境にアクセスしてテーブル情報を取得する際に、フィルターを適用し、必要な情報だけを取得することができます。  
+この記事では、Power Automate の Fin & Ops Apps (Dynamics 365) コネクタにおけるフィルターの設定方法をご案内します。
+この手順により、Power Automate から Dynamics 365 for Finance and Operations (D365FO) 環境にアクセスしてテーブル情報を取得する際に、フィルターを適用し、必要な情報だけを取得することができます。  
 
 <!-- more -->
 ## 検証に用いた製品・バージョン
@@ -23,7 +23,7 @@ Platform version: PU54
 
 ## PowerAutomateのFin&OpsApps(Dynamics365)コネクタにおけるフィルターの設定方法
 
-例えば、ステータスが'エラー'であるBatchジョブだけの情報を取得したい場合は、下記のようにフローを設定することで、情報を取得できます。
+例えば、ステータスが'エラー'であるBatch ジョブだけの情報を取得したい場合は、下記のようにフローを設定することで、情報を取得できます。
 
 ```javascript
 Status eq Microsoft.Dynamics.DataEntities.BatchStatus'Error'
